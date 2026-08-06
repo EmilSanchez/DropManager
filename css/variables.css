@@ -1,0 +1,71 @@
+/* ==========================================================================
+   MeliManager Pro — Design Tokens
+   ========================================================================== */
+
+:root {
+  /* Color palette */
+  --color-bg: #F6F8FB;
+  --color-card: #FFFFFF;
+  --color-text-primary: #1E293B;
+  --color-text-secondary: #64748B;
+  --color-border: #E2E8F0;
+  --color-blue: #2563EB;
+  --color-blue-light: #EFF4FF;
+  --color-green: #10B981;
+  --color-green-light: #ECFDF5;
+  --color-red: #EF4444;
+  --color-red-light: #FEF2F2;
+  --color-amber: #F59E0B;
+  --color-amber-light: #FFFBEB;
+
+  --color-sidebar-bg: #0F172A;
+  --color-sidebar-text: #94A3B8;
+  --color-sidebar-text-active: #FFFFFF;
+  --color-sidebar-item-active-bg: #2563EB;
+  --color-sidebar-border: #1E293B;
+
+  /* Typography */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --fs-xs: 11px;
+  --fs-sm: 12.5px;
+  --fs-base: 14px;
+  --fs-md: 15px;
+  --fs-lg: 18px;
+  --fs-xl: 22px;
+  --fs-2xl: 28px;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-full: 999px;
+
+  /* Shadows (very soft) */
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 2px 8px rgba(15, 23, 42, 0.05);
+  --shadow-lg: 0 8px 24px rgba(15, 23, 42, 0.07);
+
+  /* Layout */
+  --sidebar-width: 220px;
+  --sidebar-width-collapsed: 72px;
+  --header-height: 70px;
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 200ms ease;
+}

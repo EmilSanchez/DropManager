@@ -1,0 +1,177 @@
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  border-radius: var(--radius-sm);
+  padding: 8px 14px;
+  border: 1px solid transparent;
+  transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+  white-space: nowrap;
+}
+
+.btn svg {
+  width: 15px;
+  height: 15px;
+}
+
+.btn--primary {
+  background: var(--color-blue);
+  color: #fff;
+}
+.btn--primary:hover {
+  background: #1D4ED8;
+}
+
+.btn--secondary {
+  background: var(--color-card);
+  color: var(--color-text-primary);
+  border-color: var(--color-border);
+}
+.btn--secondary:hover {
+  background: #F8FAFC;
+  border-color: #CBD5E1;
+}
+
+.btn--outline {
+  background: transparent;
+  color: var(--color-text-secondary);
+  border-color: var(--color-border);
+}
+.btn--outline:hover {
+  background: #F8FAFC;
+  color: var(--color-text-primary);
+}
+
+.btn--sm {
+  padding: 6px 12px;
+  font-size: var(--fs-xs);
+}
+
+.btn--block {
+  width: 100%;
+}
+
+/* ==========================================================================
+   Badges
+   ========================================================================== */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  line-height: 1.4;
+}
+
+.badge--success {
+  background: var(--color-green-light);
+  color: var(--color-green);
+}
+
+.badge--danger {
+  background: var(--color-red-light);
+  color: var(--color-red);
+}
+
+.badge--neutral {
+  background: #F1F5F9;
+  color: var(--color-text-secondary);
+}
+
+/* ==========================================================================
+   Dropdown / Select
+   ========================================================================== */
+
+.select {
+  position: relative;
+  width: 100%;
+}
+
+.select__control {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 10px var(--space-3);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--color-text-primary);
+  transition: border-color var(--transition-fast);
+}
+
+.select__control:hover {
+  border-color: #CBD5E1;
+}
+
+.select__control svg {
+  width: 16px;
+  height: 16px;
+  color: var(--color-text-secondary);
+  transition: transform var(--transition-fast);
+}
+
+.select.is-open .select__control svg {
+  transform: rotate(180deg);
+}
+
+.select__menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-lg);
+  padding: 6px;
+  z-index: 20;
+  display: none;
+}
+
+.select.is-open .select__menu {
+  display: block;
+}
+
+.select__option {
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: var(--fs-sm);
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.select__option:hover {
+  background: #F8FAFC;
+}
+
+.select__option.is-selected {
+  color: var(--color-blue);
+  font-weight: var(--fw-semibold);
+}
+
+/* ==========================================================================
+   Card (generic)
+   ========================================================================== */
+
+.card {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
