@@ -7,4 +7,5 @@ document.addEventListener('DOMContentLoaded', () => {
   renderAll();
   initSidebar();
   initSelects();
+  showView('resumen');
 });

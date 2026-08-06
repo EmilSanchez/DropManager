@@ -27,40 +27,56 @@ function renderUser() {
   if (avatarEl) avatarEl.textContent = USER.initials;
 }
 
-function trendIcon(direction) {
-  return direction === 'up' ? Icons.trendUp : Icons.trendDown;
+function renderSubmodules(navId) {
+  const grid = document.getElementById('submodulesGrid');
+  if (!grid) return;
+
+  const subs = SUBMODULES[navId];
+  if (!subs || !subs.length) {
+    grid.hidden = true;
+    grid.innerHTML = '';
+    return;
+  }
+
+  grid.hidden = false;
+  grid.innerHTML = subs.map(sub => `
+    <div class="submodule-card">
+      <span class="submodule-card__icon">${Icons[sub.icon] || Icons.grid}</span>
+      <span class="submodule-card__label">${sub.label}</span>
+      <span class="submodule-card__status">En desarrollo</span>
+    </div>
+  `).join('');
+}
+
+function renderKpiCard(kpi) {
+  return `
+    <div class="card kpi-card">
+      <div class="kpi-card__icon-panel kpi-card__icon-panel--${kpi.color}">${Icons[kpi.icon]}</div>
+      <div class="kpi-card__body">
+        <span class="kpi-card__label">${kpi.label}</span>
+        <span class="kpi-card__value">${kpi.value}</span>
+      </div>
+    </div>
+  `;
 }
 
 function renderKpis() {
   const row = document.getElementById('kpiRow');
   if (!row) return;
 
-  const kpiCardsHtml = KPIS.map(kpi => `
-    <div class="card kpi-card">
-      <div class="kpi-card__top">
-        <span class="kpi-card__label">${kpi.label}</span>
-        <span class="kpi-card__icon">${Icons[kpi.icon]}</span>
-      </div>
-      <div>
-        <div class="kpi-card__value">${kpi.value}</div>
-        <div class="kpi-card__meta">
-          <span class="kpi-card__trend kpi-card__trend--${kpi.trend.direction}">
-            ${trendIcon(kpi.trend.direction)} ${kpi.trend.value}
-          </span>
-          <span>${kpi.trend.vs}</span>
-        </div>
-      </div>
-    </div>
-  `).join('');
+  const kpiCardsHtml = KPIS.map(renderKpiCard).join('');
 
   const storesCardHtml = `
-    <div class="card kpi-card">
-      <div class="kpi-card__top">
-        <span class="kpi-card__label">Tiendas</span>
-        <span class="kpi-card__icon">${Icons.store}</span>
+    <div class="card kpi-card kpi-card--stores">
+      <div class="kpi-card__main">
+        <div class="kpi-card__icon-panel kpi-card__icon-panel--navy">${Icons.store}</div>
+        <div class="kpi-card__body">
+          <span class="kpi-card__label">Tiendas</span>
+          <span class="kpi-card__value">${STORES_SUMMARY.total}</span>
+        </div>
       </div>
-      <div>
-        <div class="kpi-card__value">${STORES_SUMMARY.total} <span style="font-size: var(--fs-sm); font-weight: var(--fw-medium); color: var(--color-text-secondary);">totales</span></div>
+      <div class="kpi-card__stores-right">
+        <span class="kpi-card__divider"></span>
         <div class="kpi-card__stores-breakdown">
           <span><i class="dot dot--green"></i><b>${STORES_SUMMARY.active}</b> activas</span>
           <span><i class="dot dot--gray"></i><b>${STORES_SUMMARY.inactive}</b> inactivas</span>
@@ -96,54 +112,53 @@ function metricDotClass(value, thresholds) {
   return 'dot--green';
 }
 
+function reputationLevel(value) {
+  if (value >= 95) return 'good';
+  if (value >= 85) return 'warn';
+  return 'bad';
+}
+
 function renderStoreCard(store) {
-  const statusBadge = store.status === 'Activa'
-    ? `<span class="badge badge--success"><i class="dot dot--green"></i>Activa</span>`
-    : `<span class="badge badge--neutral"><i class="dot dot--gray"></i>Inactiva</span>`;
+  const statusDot = store.status === 'Activa' ? 'dot--green' : 'dot--gray';
+  const repLevel = reputationLevel(store.metrics.reputacion);
 
   return `
     <div class="card store-card" data-store-id="${store.id}">
       <div class="store-card__header">
         <div class="store-card__identity">
-          <div class="store-card__avatar">${Icons.store}</div>
+          <div class="store-card__avatar">${Icons.userFilled}</div>
           <div>
             <div class="store-card__name">${store.name}</div>
-            <div class="store-card__meta">${store.platform} · ${store.listings} publicaciones</div>
+            <div class="store-card__status"><i class="dot ${statusDot}"></i>${store.status}</div>
           </div>
         </div>
-        <div class="store-card__header-right">
-          ${statusBadge}
-          <button class="store-card__menu-btn" aria-label="Más opciones">${Icons.moreHorizontal}</button>
-        </div>
+        <button class="store-card__menu-btn" aria-label="Más opciones">${Icons.moreHorizontal}</button>
       </div>
 
-      <div class="store-card__metrics">
-        <div class="store-card__metric">
-          <span class="store-card__metric-label"><i class="dot dot--green"></i>Reputación</span>
-          <span class="store-card__metric-value">${store.metrics.reputacion}%</span>
+      <div class="store-card__stats">
+        <div class="store-card__stats-col">
+          <div class="store-card__reputation-row">
+            <span class="store-card__stats-heading">Reputación</span>
+            <span class="store-card__reputation-bar store-card__reputation-bar--${repLevel}"></span>
+          </div>
+          <ul class="store-card__stats-list">
+            <li><span><i class="dot dot--green"></i>Reclamos</span><b>${store.metrics.reclamos}%</b></li>
+            <li><span><i class="dot dot--green"></i>Cancelaciones</span><b>${store.metrics.cancelaciones}%</b></li>
+            <li><span><i class="dot dot--amber"></i>Demoras</span><b>${store.metrics.demoras}%</b></li>
+          </ul>
         </div>
-        <div class="store-card__metric">
-          <span class="store-card__metric-label"><i class="dot dot--green"></i>Reclamos</span>
-          <span class="store-card__metric-value">${store.metrics.reclamos}%</span>
-        </div>
-        <div class="store-card__metric">
-          <span class="store-card__metric-label"><i class="dot dot--green"></i>Cancelaciones</span>
-          <span class="store-card__metric-value">${store.metrics.cancelaciones}%</span>
-        </div>
-        <div class="store-card__metric">
-          <span class="store-card__metric-label"><i class="dot dot--amber"></i>Demoras</span>
-          <span class="store-card__metric-value">${store.metrics.demoras}%</span>
+
+        <div class="store-card__stats-divider"></div>
+
+        <div class="store-card__stats-col">
+          <span class="store-card__stats-heading">Ventas</span>
+          <div class="store-card__stats-value">${store.sales60d} <span>últimos 60 días</span></div>
+          <button class="btn btn--teal btn--block store-card__infractions-btn">${Icons.shield} Infracciones</button>
         </div>
       </div>
 
       <div class="store-card__footer">
-        <div class="store-card__rating">
-          Calificación <b>${Icons.star} ${store.rating}</b>
-        </div>
-        <div class="store-card__actions">
-          <button class="btn btn--outline btn--sm">${Icons.shield} Infracciones</button>
-          <button class="btn btn--secondary btn--sm">${Icons.externalLink} Ver detalles</button>
-        </div>
+        <span class="badge badge--success">Sin límite</span>
       </div>
     </div>
   `;
@@ -151,7 +166,6 @@ function renderStoreCard(store) {
 
 function renderStores(filter = 'all') {
   const grid = document.getElementById('storesGrid');
-  const countEl = document.getElementById('storesCount');
   if (!grid) return;
 
   const filtered = STORES.filter(store => {
@@ -161,7 +175,6 @@ function renderStores(filter = 'all') {
   });
 
   grid.innerHTML = filtered.map(renderStoreCard).join('');
-  if (countEl) countEl.textContent = `(${filtered.length})`;
 }
 
 function renderAll() {

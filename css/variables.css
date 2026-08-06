@@ -1,5 +1,5 @@
 /* ==========================================================================
-   MeliManager Pro — Design Tokens
+   Drop Manager — Design Tokens
    ========================================================================== */
 
 :root {
@@ -17,6 +17,10 @@
   --color-red-light: #FEF2F2;
   --color-amber: #F59E0B;
   --color-amber-light: #FFFBEB;
+
+  --color-navy: #0F172A;
+  --color-teal: #0E7490;
+  --color-header-bg: #132041;
 
   --color-sidebar-bg: #0F172A;
   --color-sidebar-text: #94A3B8;

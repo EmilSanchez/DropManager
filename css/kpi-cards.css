@@ -4,84 +4,90 @@
 
 .kpi-row {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr)) 1.15fr 1.15fr;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--space-5);
   margin-bottom: var(--space-5);
 }
 
 .kpi-card {
-  padding: var(--space-5);
+  padding: var(--space-3);
   min-height: 95px;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.kpi-card__top {
-  display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: var(--space-4);
 }
 
-.kpi-card__label {
-  font-size: var(--fs-xs);
-  font-weight: var(--fw-semibold);
-  letter-spacing: 0.04em;
-  color: var(--color-text-secondary);
-  text-transform: uppercase;
-}
-
-.kpi-card__icon {
-  width: 30px;
-  height: 30px;
-  border-radius: 8px;
-  background: var(--color-blue-light);
-  color: var(--color-blue);
+/* Colored icon panel on the left */
+.kpi-card__icon-panel {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
-.kpi-card__icon svg {
-  width: 16px;
-  height: 16px;
+.kpi-card__icon-panel svg {
+  width: 28px;
+  height: 28px;
+  color: #fff;
+}
+
+.kpi-card__icon-panel--navy { background: var(--color-navy); }
+.kpi-card__icon-panel--teal { background: var(--color-teal); }
+.kpi-card__icon-panel--blue { background: var(--color-blue); }
+
+.kpi-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.kpi-card__label {
+  font-size: var(--fs-base);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.02em;
+  color: var(--color-blue);
+  text-transform: uppercase;
 }
 
 .kpi-card__value {
-  font-size: var(--fs-2xl);
+  font-size: var(--fs-base);
   font-weight: var(--fw-bold);
   color: var(--color-text-primary);
   line-height: 1.1;
-  margin: var(--space-2) 0 4px;
 }
 
-.kpi-card__meta {
-  font-size: var(--fs-xs);
-  color: var(--color-text-secondary);
+.kpi-card--stores {
+  justify-content: space-between;
+}
+
+.kpi-card__main {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: var(--space-4);
+  min-width: 0;
 }
 
-.kpi-card__trend {
-  display: inline-flex;
+.kpi-card__stores-right {
+  display: flex;
   align-items: center;
-  gap: 3px;
-  font-weight: var(--fw-semibold);
+  gap: var(--space-4);
+  flex-shrink: 0;
 }
 
-.kpi-card__trend svg {
-  width: 12px;
-  height: 12px;
+.kpi-card__divider {
+  width: 1px;
+  align-self: stretch;
+  background: var(--color-border);
 }
-
-.kpi-card__trend--up { color: var(--color-green); }
-.kpi-card__trend--down { color: var(--color-red); }
 
 .kpi-card__stores-breakdown {
   display: flex;
-  gap: var(--space-4);
-  margin-top: 4px;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .kpi-card__stores-breakdown span {
@@ -90,6 +96,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
+  white-space: nowrap;
 }
 
 .kpi-card__stores-breakdown b {
@@ -114,14 +121,14 @@
   text-transform: uppercase;
 }
 
-@media (max-width: 1440px) {
+@media (max-width: 1180px) {
   .kpi-row {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 640px) {
   .kpi-row {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
   }
 }

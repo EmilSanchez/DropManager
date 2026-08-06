@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MeliManager Pro — Resumen</title>
+<title>Drop Manager — Resumen</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="css/header.css">
 <link rel="stylesheet" href="css/kpi-cards.css">
 <link rel="stylesheet" href="css/store-card.css">
+<link rel="stylesheet" href="css/placeholder.css">
 </head>
 <body>
 
@@ -23,18 +24,10 @@
 
   <!-- ============================= SIDEBAR ============================= -->
   <aside class="sidebar">
-    <div class="sidebar__brand">
-      <div class="sidebar__logo" id="logoIcon"></div>
-      <div class="sidebar__brand-text">
-        <div class="sidebar__brand-name">MeliManager</div>
-        <div class="sidebar__brand-tag">Pro</div>
-      </div>
-    </div>
-
     <div class="sidebar__user">
-      <div class="sidebar__avatar" id="userAvatar">JM</div>
-      <div class="sidebar__brand-text">
-        <div class="sidebar__user-name" id="userName">Juan Martínez</div>
+      <div class="sidebar__avatar" id="userAvatar">ES</div>
+      <div class="sidebar__user-text">
+        <div class="sidebar__user-name" id="userName">Emil Sanchez</div>
         <div class="sidebar__user-role" id="userRole">Administrador</div>
       </div>
     </div>
@@ -42,9 +35,8 @@
     <ul class="sidebar__nav" id="sidebarNav"></ul>
 
     <div class="sidebar__footer">
-      <button class="sidebar__collapse-btn" id="collapseBtn">
+      <button class="sidebar__collapse-btn" id="collapseBtn" aria-label="Colapsar menú">
         <span id="collapseIcon"></span>
-        <span>Colapsar</span>
       </button>
     </div>
   </aside>
@@ -55,37 +47,44 @@
     <!-- Header -->
     <header class="header">
       <div>
-        <div class="header__title">Resumen</div>
-        <div class="header__subtitle">Resumen general de todas tus tiendas.</div>
+        <div class="header__title" id="pageTitle">Resumen</div>
+        <div class="header__subtitle" id="pageSubtitle">Resumen general de todas tus tiendas.</div>
       </div>
       <div class="header__actions">
-        <button class="icon-btn" aria-label="Notificaciones">
-          <span id="bellIcon"></span>
-          <span class="icon-btn__badge"></span>
-        </button>
-        <button class="icon-btn" aria-label="Configuración">
-          <span id="settingsIcon"></span>
-        </button>
-        <button class="btn btn--secondary">
-          <span id="fileIcon"></span>
-          Términos y condiciones
-        </button>
+        <div class="header__search">
+          <input type="text" class="header__search-input" placeholder="Buscar venta">
+          <span class="header__search-icon" id="searchIcon"></span>
+        </div>
       </div>
     </header>
 
     <!-- Content -->
     <main class="content">
 
-      <!-- KPI row -->
-      <section class="kpi-row" id="kpiRow"></section>
+      <!-- Resumen: única vista funcional por ahora -->
+      <div class="view" id="view-resumen">
+        <section class="kpi-row" id="kpiRow"></section>
 
-      <!-- Stores -->
-      <section class="stores-section">
-        <div class="stores-section__header">
-          <div class="stores-section__title">Tus tiendas <span id="storesCount">(0)</span></div>
+        <hr class="section-divider">
+
+        <section class="stores-section">
+          <div class="stores-grid" id="storesGrid"></div>
+        </section>
+      </div>
+
+      <!-- Placeholder compartido: se muestra para cualquier módulo aún no construido -->
+      <div class="view" id="view-placeholder" hidden>
+        <div class="placeholder">
+          <div class="placeholder__status">
+            En desarrollo
+            <span class="dots"><span></span><span></span><span></span></span>
+          </div>
+          <div class="placeholder__hint">
+            Por el momento solo el módulo Resumen está disponible. Iremos habilitando esta sección poco a poco.
+          </div>
+          <div class="submodules-grid" id="submodulesGrid" hidden></div>
         </div>
-        <div class="stores-grid" id="storesGrid"></div>
-      </section>
+      </div>
 
     </main>
   </div>
@@ -94,15 +93,13 @@
 <script src="js/icons.js"></script>
 <script src="js/data.js"></script>
 <script src="js/render.js"></script>
+<script src="js/views.js"></script>
 <script src="js/sidebar.js"></script>
 <script src="js/select.js"></script>
 <script>
   // Small icons that live outside the render-loop templates
-  document.getElementById('logoIcon').innerHTML = Icons.store;
   document.getElementById('collapseIcon').innerHTML = Icons.chevronLeft;
-  document.getElementById('bellIcon').innerHTML = Icons.bell;
-  document.getElementById('settingsIcon').innerHTML = Icons.settings;
-  document.getElementById('fileIcon').innerHTML = Icons.fileText;
+  document.getElementById('searchIcon').innerHTML = Icons.search;
 </script>
 <script src="js/app.js"></script>
 

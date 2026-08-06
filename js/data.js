@@ -18,111 +18,68 @@ const NAV_ITEMS = [
   { id: 'actualizaciones', label: 'Actualizaciones', icon: 'refresh' },
   { id: 'ganancias', label: 'Ganancias', icon: 'dollarSign' },
   { id: 'problemas', label: 'Problemas', icon: 'alertTriangle' },
-  { id: 'membresia', label: 'Membresía', icon: 'creditCard' },
-  { id: 'ticket', label: 'Ticket', icon: 'ticket' },
-  { id: 'extras', label: 'Extras', icon: 'zap' },
+  { id: 'extras', label: 'Extras', icon: 'settings' },
 ];
 
 const USER = {
-  name: 'Juan Martínez',
+  name: 'Emil Sanchez',
   role: 'Administrador',
-  initials: 'JM',
+  initials: 'ES',
+};
+
+// Submódulos dentro de cada módulo del sidebar. Por ahora solo Extras
+// tiene submódulos definidos; también se muestran como "en desarrollo".
+const SUBMODULES = {
+  extras: [
+    { id: 'configuracion', label: 'Configuración', icon: 'settings' },
+    { id: 'inventario', label: 'Inventario', icon: 'box' },
+  ],
 };
 
 const KPIS = [
   {
-    id: 'ventas-totales',
-    label: 'Ventas totales',
+    id: 'ventas',
+    label: 'Ventas',
     icon: 'cart',
-    value: '1,284',
-    trend: { direction: 'up', value: '+8.3%', vs: 'vs mes anterior' },
-  },
-  {
-    id: 'ventas-hoy',
-    label: 'Ventas hoy',
-    icon: 'cart',
-    value: '47',
-    trend: { direction: 'up', value: '+18%', vs: 'vs ayer' },
-  },
-  {
-    id: 'ventas-mes',
-    label: 'Ventas del mes',
-    icon: 'cart',
-    value: '1,284',
-    trend: { direction: 'up', value: '+8.3%', vs: 'vs mes julio anterior' },
+    value: '207',
+    color: 'navy',
   },
   {
     id: 'ganancia-neta',
-    label: 'Ganancia neta',
+    label: 'Ganancia',
     icon: 'dollarSign',
-    value: '$48,320',
-    trend: { direction: 'up', value: '+5.1%', vs: 'vs mes anterior' },
+    value: '$ 11.500.364',
+    color: 'teal',
   },
 ];
 
 const STORES_SUMMARY = {
-  total: 8,
-  active: 6,
-  inactive: 2,
+  total: 2,
+  active: 2,
+  inactive: 0,
 };
 
 const STORES = [
   {
-    id: 'electro-store-mx',
-    name: 'Electro Store MX',
+    id: 'prueba-1',
+    name: 'Prueba 1',
     platform: 'MercadoLíder',
     listings: 148,
     status: 'Activa',
     metrics: { reputacion: 98, reclamos: 0.3, cancelaciones: 1.2, demoras: 2.1 },
-    rating: 4.9,
+    sales60d: 358,
   },
   {
-    id: 'techzone-pro',
-    name: 'TechZone Pro',
+    id: 'prueba-2',
+    name: 'Prueba 2',
     platform: 'MercadoLíder',
     listings: 94,
     status: 'Activa',
     metrics: { reputacion: 97, reclamos: 0.5, cancelaciones: 0.9, demoras: 1.8 },
-    rating: 4.8,
-  },
-  {
-    id: 'gadgets-plus',
-    name: 'Gadgets Plus',
-    platform: 'Platinum',
-    listings: 212,
-    status: 'Activa',
-    metrics: { reputacion: 95, reclamos: 0.8, cancelaciones: 1.5, demoras: 3.2 },
-    rating: 4.7,
-  },
-  {
-    id: 'hogar-facil',
-    name: 'Hogar Fácil',
-    platform: 'MercadoLíder',
-    listings: 76,
-    status: 'Activa',
-    metrics: { reputacion: 96, reclamos: 0.6, cancelaciones: 1.0, demoras: 2.4 },
-    rating: 4.8,
-  },
-  {
-    id: 'moda-urbana',
-    name: 'Moda Urbana',
-    platform: 'Platinum',
-    listings: 305,
-    status: 'Activa',
-    metrics: { reputacion: 93, reclamos: 1.1, cancelaciones: 1.8, demoras: 3.6 },
-    rating: 4.6,
-  },
-  {
-    id: 'deportes-max',
-    name: 'Deportes Max',
-    platform: 'Gold',
-    listings: 58,
-    status: 'Inactiva',
-    metrics: { reputacion: 90, reclamos: 1.4, cancelaciones: 2.1, demoras: 4.0 },
-    rating: 4.4,
+    sales60d: 214,
   },
 ];
 
 if (typeof module !== 'undefined') {
-  module.exports = { NAV_ITEMS, USER, KPIS, STORES_SUMMARY, STORES };
+  module.exports = { NAV_ITEMS, USER, SUBMODULES, KPIS, STORES_SUMMARY, STORES };
 }

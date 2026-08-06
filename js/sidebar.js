@@ -11,12 +11,11 @@ function initSidebar() {
 
   if (!app || !collapseBtn) return;
 
-  const STORAGE_KEY = 'melimanager:sidebarCollapsed';
+  const STORAGE_KEY = 'dropmanager:sidebarCollapsed';
 
   function applyState(collapsed) {
     app.classList.toggle('sidebar-collapsed', collapsed);
-    const label = collapseBtn.querySelector('span');
-    if (label) label.textContent = collapsed ? 'Expandir' : 'Colapsar';
+    collapseBtn.setAttribute('aria-label', collapsed ? 'Expandir menú' : 'Colapsar menú');
   }
 
   const storedState = localStorage.getItem(STORAGE_KEY) === 'true';
@@ -35,6 +34,7 @@ function initSidebar() {
       e.preventDefault();
       nav.querySelectorAll('.sidebar__item').forEach(el => el.classList.remove('is-active'));
       item.classList.add('is-active');
+      showView(item.dataset.navId);
     });
   }
 }

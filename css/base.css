@@ -86,8 +86,26 @@ svg {
 
 .content {
   padding: var(--space-6) 32px 48px;
-  max-width: 1440px;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Module content fades/slides in each time a view becomes visible */
+.view:not([hidden]) {
+  animation: view-enter 500ms ease;
+}
+
+@keyframes view-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ==========================================================================
